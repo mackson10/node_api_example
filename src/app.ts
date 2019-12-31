@@ -1,9 +1,24 @@
-import express from "express";
+import express, { Request, Response } from "express";
 
-const app = express();
+export default createApp();
 
-app.get("*", (_, res) => {
-  res.send("Hello world!!");
-});
+function createApp(): express.Application {
+  const app = express();
+  const rootRouter = express.Router();
 
-export default app;
+  rootRouter.use("/", function(_, res) {
+    res.send("Welcome!");
+  });
+
+  rootRouter.use(function(_, __, next) {
+    next(new Error("Not Found"));
+  });
+
+  rootRouter.use(function(error: Error, _: Request, res: Response): void {
+    res.send({ message: error.message });
+  });
+
+  app.use("/", rootRouter);
+
+  return app;
+}
