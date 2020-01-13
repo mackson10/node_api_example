@@ -14,7 +14,12 @@ function getConfig(): Config {
 
   return {
     port: getFromEnvironment("PORT"),
-    p: getFromEnvironment("P")
+    mysql: {
+      host: getFromEnvironment("MYSQL_HOST"),
+      user: getFromEnvironment("MYSQL_USER"),
+      password: getFromEnvironment("MYSQL_PASSWORD"),
+      database: getFromEnvironment("MYSQL_DB")
+    }
   };
 }
 
@@ -42,7 +47,7 @@ function loadEnviromentFromFile(filePath: string): void {
 }
 
 /**
- * Verify if some env variable exists, if yes returns it, otherwise throws an Error
+ * Verify if the env variable exists, if yes returns it, otherwise throws an Error
  * @param {string} envKey Key in the .env File
  * @return {string} corresponding env variable's value
  * @throws {Error} not defined error
@@ -56,11 +61,9 @@ function getFromEnvironment(envKey: string): string {
 }
 
 /**
- * Config object's keys
- */
-type EnvironmentVariablesNames = "port" | "p";
-
-/**
  * Config Object from Environment
  */
-type Config = Record<EnvironmentVariablesNames, string>;
+type Config = {
+  port: string;
+  mysql: { host: string; user: string; password: string; database: string };
+};

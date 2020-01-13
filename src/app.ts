@@ -1,24 +1,27 @@
-import express, { Request, Response } from "express";
-
+import express, { NextFunction } from "express";
+import errorMiddleware from "./middlewares/errorMiddleware";
+import HttpError from "./utils/HttpError";
 export default createApp();
 
 function createApp(): express.Application {
   const app = express();
+
+  app.use(express.json());
+  app.use(express.text());
+
   const rootRouter = express.Router();
 
-  rootRouter.use("/", function(_, res) {
+  app.use("/", rootRouter);
+
+  rootRouter.all("/", function(req, res) {
     res.send("Welcome!");
   });
 
-  rootRouter.use(function(_, __, next) {
-    next(new Error("Not Found"));
+  rootRouter.use("*", function(_, __, next: NextFunction) {
+    next(new HttpError(404));
   });
 
-  rootRouter.use(function(error: Error, _: Request, res: Response): void {
-    res.send({ message: error.message });
-  });
-
-  app.use("/", rootRouter);
+  rootRouter.use(errorMiddleware);
 
   return app;
 }
