@@ -30,14 +30,17 @@ function getConfig(): Config {
 function loadEnviromentFromFile(filePath: string): void {
   const normalizedFilePath = path.normalize(filePath);
 
-  if (!fs.existsSync(normalizedFilePath))
-    throw new Error(".env file not found");
+  if (!fs.existsSync(normalizedFilePath)) {
+    console.log(
+      "Warning: .env file not found, expecting variables from process"
+    );
+  }
 
   const fileString = fs.readFileSync(normalizedFilePath).toString();
-  const lines = fileString.split(";");
+  const lines = fileString.split("\n");
 
   lines.forEach(line => {
-    const lineSplit = line.split("=");
+    const lineSplit = line.trim().split("=");
 
     const key = lineSplit[0];
     const value = lineSplit[1];
