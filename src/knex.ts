@@ -7,7 +7,7 @@ function createConnection(): knex {
   const { host, user, password, database } = config.mysql;
   const conn = knex({
     client: "mysql",
-    debug: true, // Very useful
+    debug: false, // useful
     connection: {
       host,
       user,

@@ -16,7 +16,7 @@ const { port } = config;
 })();
 
 async function testDBConnection(): Promise<void> {
-  await knex.select(1);
+  // await knex.select(1);
 }
 
 async function startHTTPServer(): Promise<void> {

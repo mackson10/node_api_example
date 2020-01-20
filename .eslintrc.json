@@ -27,6 +27,7 @@
     "@typescript-eslint/no-use-before-define": "off",
     "new-cap": "off",
     "require-jsdoc": "off",
-    "valid-jsdoc": "off"
+    "valid-jsdoc": "off",
+    "@typescript-eslint/no-non-null-assertion": "off"
   }
 }

@@ -19,7 +19,8 @@ function getConfig(): Config {
       user: getFromEnvironment("MYSQL_USER"),
       password: getFromEnvironment("MYSQL_PASSWORD"),
       database: getFromEnvironment("MYSQL_DB")
-    }
+    },
+    encryptionKey: getFromEnvironment("ENCRYPTION_KEY")
   };
 }
 
@@ -67,6 +68,7 @@ function getFromEnvironment(envKey: string): string {
  * Config Object from Environment
  */
 type Config = {
+  encryptionKey: string;
   port: string;
   mysql: { host: string; user: string; password: string; database: string };
 };

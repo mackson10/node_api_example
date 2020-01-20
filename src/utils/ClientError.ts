@@ -1,15 +1,22 @@
-export default class HttpError extends Error {
-  code: number;
+export default class ClientError extends Error {
+  httpCode: number;
+  messageId: number;
 
-  constructor(
-    code: number,
-    message?: string,
-    name: string | undefined = HTTP_ERRORS_NAMES[code]
-  ) {
+  constructor({
+    httpCode = 200,
+    message = "No message defined",
+    messageId = 0,
+    name = HTTP_ERRORS_NAMES[httpCode] || "UserError"
+  }: {
+    httpCode?: number;
+    message?: string;
+    messageId?: number;
+    name?: string;
+  }) {
     super(message);
-
     this.name = name || "Unnamed Error";
-    this.code = code;
+    this.httpCode = httpCode;
+    this.messageId = messageId;
   }
 }
 

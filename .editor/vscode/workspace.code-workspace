@@ -13,8 +13,8 @@
     "editor.formatOnSave": true,
     "editor.tabSize": 2,
     "prettier.printWidth": 80,
-    "eslint.validate": ["typescript"],
-    "window.zoomLevel": -0.18,
+    "eslint.validate": ["typescript", "javascript"],
+    "window.zoomLevel": 0,
     "prettier.endOfLine": "crlf"
   }
 }
