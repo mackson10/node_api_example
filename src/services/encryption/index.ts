@@ -1,6 +1,5 @@
 import simpleEncryptor, { SimpleEncryptor } from "simple-encryptor";
 import config from "../../config";
-import { Result } from "../../utils/types";
 
 class CryptoService {
   private encryptor: SimpleEncryptor;
